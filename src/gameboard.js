@@ -24,23 +24,24 @@ class GameBoard {
     }
   }
 
-  receivedAttack(coord) {
-    if (
-      this.missedCells.has(this.board[coord[0]][coord[1]]) ||
-      this.foundCells(this.board[coord[0]][coord[1]])
-    ) {
-      // prompt user for coordinates again
-      return null;
+  receiveAttack(coord) {
+    // let user get another chance if the coordinate chosen
+    // is part of an already missed cell or found cell
+    if (this.missedCells.has(this.board[coord[0]][coord[1]]) ||
+        this.foundCells(this.board[coord[0]][coord[1]]) ) {
+        return true;
     }
 
+    // don't let user take another turn if coord did not 
+    // hit any cell
     if (this.board[coord[0]][coord[1]] == null) {
       this.missedCells.set(this.board[coord[0]][coord[1]], true);
-      // use return value to prompt for diff coord
-      return;
+      return false;
     }
     this.board[coord[0]][coord[1]].hit();
     this.foundCells.set(this.board[coord[0]][coord[1]], true);
-    // use the return value here to say hit was valid and let user choose another coord
+
+    return true;
   }
 
   // passes an array of all ships and check if all of them have been sunked
