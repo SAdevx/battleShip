@@ -5,6 +5,7 @@ class GameBoard {
     this.board = [];
     this.missedCells = new Map();
     this.foundCells = new Map();
+    this.shipsNeighborsCells = new Map();
   }
 
   createBoard() {
@@ -16,10 +17,34 @@ class GameBoard {
     }
   }
 
-  placeShip(startCoord, endCoord, playerBoard, ship) {
+  
+  cellTaken(startCoord, endCoord){
+    for(let i = startCoord[0]-1; i <= endCoord[0]+1; i++){
+      for(let j = startCoord[1]-1; j <= endCoord[1]+1; j++){
+        if(i >= 0 && i <= this.row && j >= 0 && j <= this.row){
+          if(this.shipsNeighborsCells.has(`${i}${j}`)){
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  placeShip(startCoord, endCoord, board, ship) {
+    // store ship and its neighbors cells to stop placement
+    // of other ships around it
+    for(let i = startCoord[0]-1; i <= endCoord[0]+1; i++){
+      for(let j = startCoord[1]-1; j <= endCoord[1]+1; j++){
+        if(i >= 0 && i <= this.row && j >= 0 && j <= this.row){
+          this.shipsNeighborsCells.set(`${i}${j}`,true);
+        }
+      }
+    }
+
     for (let i = startCoord[0]; i <= endCoord[1]; i++) {
       for (let j = startCoord[1]; j <= endCoord[1]; j++) {
-        playerBoard[i][j].push(ship);
+        board[i][j].push(ship);
       }
     }
   }
