@@ -17,7 +17,6 @@ class GameBoard {
     }
   }
 
-  
   cellTaken(startCoord, endCoord){
     for(let i = startCoord[0]-1; i <= endCoord[0]+1; i++){
       for(let j = startCoord[1]-1; j <= endCoord[1]+1; j++){
@@ -31,7 +30,7 @@ class GameBoard {
     return false;
   }
 
-  placeShip(startCoord, endCoord, board, ship) {
+  placeShip(startCoord, endCoord, ship) {
     // store ship and its neighbors cells to stop placement
     // of other ships around it
     for(let i = startCoord[0]-1; i <= endCoord[0]+1; i++){
@@ -42,9 +41,9 @@ class GameBoard {
       }
     }
 
-    for (let i = startCoord[0]; i <= endCoord[1]; i++) {
+    for (let i = startCoord[0]; i <= endCoord[0]; i++) {
       for (let j = startCoord[1]; j <= endCoord[1]; j++) {
-        board[i][j].push(ship);
+        this.board[i][j] = ship;
       }
     }
   }
@@ -53,7 +52,7 @@ class GameBoard {
     // let user get another chance if the coordinate chosen
     // is part of an already missed cell or found cell
     if (this.missedCells.has(this.board[coord[0]][coord[1]]) ||
-        this.foundCells(this.board[coord[0]][coord[1]]) ) {
+        this.foundCells.has(this.board[coord[0]][coord[1]]) ) {
         return true;
     }
 
