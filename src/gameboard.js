@@ -56,8 +56,7 @@ class GameBoard {
         return true;
     }
 
-    // don't let user take another turn if coord did not 
-    // hit any cell
+    // don't let user take another turn if coord did not hit any cell
     if (this.board[coord[0]][coord[1]] == null) {
       this.missedCells.set(this.board[coord[0]][coord[1]], true);
       return false;
