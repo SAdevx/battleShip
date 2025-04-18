@@ -1,7 +1,15 @@
 class Player {
-  constructor(name = "player", board) {
+  constructor(name, board) {
     this.name = name;
     this.board = board;
+  }
+  
+  getName(){
+    return this.name;
+  }
+
+  getBoard(){
+    return this.board;
   }
 }
 
