@@ -21,3 +21,9 @@ body {
     height: 400px;
     width: 400px;
 }
+
+.player-cell:hover,
+.computer-cell:hover {
+   cursor: pointer;
+
+}
