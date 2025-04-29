@@ -5,8 +5,8 @@ function getBoard(){
     const board1 = document.createElement("div");
     const board2 = document.createElement("div");
 
-    board1.classList.add("board");
-    board2.classList.add("board");
+    board1.classList.add("player1-board");
+    board2.classList.add("player2-board");
     
     for(let i = 1; i <= 100; i++){
        
@@ -35,13 +35,15 @@ function getBoard(){
 function placeShipDOM(startCoord, endCoord){
     for (let i = startCoord[0]; i <= endCoord[0]; i++) {
        for (let j = startCoord[1]; j <= endCoord[1]; j++) {
-          const cells = document.querySelectorAll(`[data-cell="${i}${j}"]`);
-          cells.forEach(cell => {
-            cell.style.backgroundColor = "violet";
-          });
-       }
+            //get player and computer board cell and change their background
+            const cells = document.querySelectorAll(`[data-cell="${i}${j}"]`);
+            cells.forEach(cell => {
+            cell.style.backgroundColor = `rgb(227, 74, 74)`;
+            });
+        }
     }
  }
+
 
 
 export { getBoard, placeShipDOM };
